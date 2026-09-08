@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>unseriousislam — link in bio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151021;
+    --paper:#FFF6E9;
+    --pink:#FF3E9A;
+    --lime:#C7FF3E;
+    --purple:#5B2AE0;
+    --orange:#FF7A1A;
+    --yellow:#FFD23F;
+    --sky:#3EC6FF;
+    --line:4px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--purple);
+    background-image:
+      radial-gradient(circle at 8% 15%, rgba(255,255,255,0.10) 0, transparent 45%),
+      radial-gradient(circle at 92% 80%, rgba(255,255,255,0.08) 0, transparent 40%);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:36px 16px 60px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition:none !important; }
+  }
+
+  .sky{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .doodle{
+    position:absolute;
+    font-size:28px;
+    opacity:0.35;
+    filter:saturate(1.2);
+    transform:rotate(var(--r,0deg));
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:430px;
+  }
+
+  /* ---- Header / profile ---- */
+  .profile{
+    background:var(--paper);
+    border:var(--line) solid var(--ink);
+    border-radius:26px;
+    padding:28px 22px 24px;
+    text-align:center;
+    box-shadow:8px 8px 0 var(--ink);
+    position:relative;
+    transform:rotate(-1.2deg);
+  }
+
+  .avatar{
+    width:88px;
+    height:88px;
+    margin:0 auto 14px;
+    background:var(--lime);
+    border:var(--line) solid var(--ink);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    box-shadow:5px 5px 0 var(--ink);
+    animation:wobble 5s ease-in-out infinite;
+  }
+
+  @keyframes wobble{
+    0%,100%{ transform:rotate(-6deg); }
+    50%{ transform:rotate(6deg); }
+  }
+
+  .handle{
+    font-family:'Archivo Black', sans-serif;
+    font-size:26px;
+    line-height:1.05;
+    letter-spacing:-0.5px;
+    margin:0 0 8px;
+  }
+  .handle span{
+    color:var(--pink);
+    -webkit-text-stroke:1.5px var(--ink);
+  }
+
+  .tagline{
+    font-size:15.5px;
+    font-weight:700;
+    max-width:300px;
+    margin:0 auto 14px;
+    line-height:1.4;
+  }
+
+  .badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+  }
+  .badge{
+    background:var(--yellow);
+    border:2.5px solid var(--ink);
+    border-radius:999px;
+    padding:5px 12px;
+    font-size:12.5px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .badge:nth-child(2){ background:var(--sky); }
+  .badge:nth-child(3){ background:var(--orange); color:var(--paper); }
+
+  /* ---- marquee ---- */
+  .marquee{
+    margin:22px 0;
+    border:var(--line) solid var(--ink);
+    border-radius:999px;
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    white-space:nowrap;
+    box-shadow:6px 6px 0 rgba(0,0,0,0.25);
+  }
+  .marquee div{
+    display:inline-block;
+    padding:10px 0;
+    font-family:'Permanent Marker', cursive;
+    font-size:16px;
+    animation:scroll 16s linear infinite;
+  }
+  @keyframes scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ---- links ---- */
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  .link-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    text-decoration:none;
+    color:var(--ink);
+    background:var(--paper);
+    border:var(--line) solid var(--ink);
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:6px 6px 0 var(--ink);
+    transform:rotate(var(--tilt, -0.6deg));
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .link-card:hover, .link-card:focus-visible{
+    transform:rotate(0deg) translate(-2px,-2px);
+    box-shadow:9px 9px 0 var(--ink);
+    outline:none;
+  }
+  .link-card:active{
+    transform:translate(2px,2px);
+    box-shadow:3px 3px 0 var(--ink);
+  }
+  .link-card:nth-child(1){ background:var(--lime); --tilt:-1deg; }
+  .link-card:nth-child(2){ background:var(--sky); --tilt:0.8deg; }
+  .link-card:nth-child(3){ background:var(--yellow); --tilt:-0.4deg; }
+  .link-card:nth-child(4){ background:var(--pink); color:var(--paper); --tilt:0.5deg; }
+
+  .link-emoji{
+    font-size:26px;
+    flex:0 0 auto;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    border-radius:12px;
+  }
+  .link-card:nth-child(4) .link-emoji{ background:var(--yellow); }
+
+  .link-text{ flex:1; }
+  .link-title{
+    font-family:'Archivo Black', sans-serif;
+    font-size:16px;
+    display:block;
+    margin-bottom:2px;
+  }
+  .link-sub{
+    font-size:12.5px;
+    font-weight:500;
+    opacity:0.8;
+  }
+
+  .arrow{
+    font-family:'Archivo Black', sans-serif;
+    font-size:20px;
+    flex:0 0 auto;
+  }
+
+  /* ---- footer ---- */
+  footer{
+    margin-top:30px;
+    text-align:center;
+    color:var(--paper);
+    font-size:12.5px;
+    font-weight:500;
+    opacity:0.85;
+    line-height:1.6;
+  }
+  footer strong{ font-family:'Permanent Marker', cursive; font-size:15px; display:block; margin-bottom:4px; color:var(--yellow); }
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <span class="doodle" style="top:6%; left:6%; --r:-10deg;">✨</span>
+  <span class="doodle" style="top:14%; right:8%; --r:12deg;">🌙</span>
+  <span class="doodle" style="top:38%; left:2%; --r:8deg;">⭐</span>
+  <span class="doodle" style="top:60%; right:4%; --r:-8deg;">💫</span>
+  <span class="doodle" style="top:80%; left:8%; --r:14deg;">✨</span>
+  <span class="doodle" style="top:88%; right:12%; --r:-14deg;">🌙</span>
+</div>
+
+<div class="page">
+
+  <div class="profile">
+    <div class="avatar" role="img" aria-label="laptop emoji">💻</div>
+    <h1 class="handle">@unserious<span>islam</span></h1>
+    <p class="tagline">chronically online. terminally posting. probably typing this reply right now.</p>
+    <div class="badges">
+      <span class="badge">memes daily*</span>
+      <span class="badge">no life outside the app</span>
+      <span class="badge">*allegedly</span>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div>disclaimer: this page takes nothing seriously, including this disclaimer &nbsp;•&nbsp; disclaimer: this page takes nothing seriously, including this disclaimer &nbsp;•&nbsp; </div>
+  </div>
+
+  <nav class="links" aria-label="links">
+    <a class="link-card" href="https://www.instagram.com/unseriousislam/" target="_blank" rel="noopener">
+      <span class="link-emoji">📸</span>
+      <span class="link-text">
+        <span class="link-title">Follow on Instagram</span>
+        <span class="link-sub">where the actual content lives</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="link-card" href="https://ig.me/m/unseriousislam" target="_blank" rel="noopener">
+      <span class="link-emoji">💬</span>
+      <span class="link-text">
+        <span class="link-title">DM me</span>
+        <span class="link-sub">I will 100% reply, I have nothing else going on</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="link-card" href="mailto:iwanimbe@gmail.com">
+      <span class="link-emoji">✉️</span>
+      <span class="link-text">
+        <span class="link-title">Email me</span>
+        <span class="link-sub">iwanimbe@gmail.com — also checked obsessively</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </nav>
+
+  <footer>
+    <strong>made with zero seriousness</strong>
+    © unseriousislam — not affiliated with any actual authority on anything
+  </footer>
+
+</div>
+
+</body>
+</html>
